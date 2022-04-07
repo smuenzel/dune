@@ -10,9 +10,9 @@ module Manpage = Cmdliner.Manpage
 module Only_packages = Dune_rules.Only_packages
 
 module Let_syntax = struct
-  let ( let+ ) t f = Term.(const f $ t)
-
   let ( and+ ) a b = Term.(const (fun x y -> (x, y)) $ a $ b)
+
+  let ( let+ ) t f = Term.(const f $ t)
 end
 
 open Let_syntax

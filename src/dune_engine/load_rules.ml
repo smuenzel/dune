@@ -279,7 +279,10 @@ let no_rule_found ~loc fn =
     Code_error.raise ?loc "Build_system.no_rule_found got anonymous action path"
       [ ("fn", Path.Build.to_dyn fn) ]
 
+(* XXX This function is confusingly named. It works on external paths just as
+   well *)
 let source_file_digest path =
+  assert (not (Path.is_in_build_dir path));
   let report_user_error details =
     let+ loc = Current_rule_loc.get () in
     User_error.raise ?loc

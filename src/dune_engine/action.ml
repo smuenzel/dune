@@ -160,6 +160,7 @@ let fold_one_step t ~init:acc ~f =
   | Diff _
   | Merge_files_into _
   | Cram _
+  | Extension _
   | Format_dune_file _ -> acc
 
 include Action_mapper.Make (Ast) (Ast)
@@ -203,6 +204,7 @@ let rec is_dynamic = function
   | Mkdir _
   | Merge_files_into _
   | Cram _
+  | Extension _
   | Format_dune_file _ -> false
 
 let maybe_sandbox_path sandbox p =
@@ -247,6 +249,11 @@ let is_useful_to distribute memoize =
     | System _ -> true
     | Bash _ -> true
     | Format_dune_file _ -> memoize
+    | Extension { spec = { how_to_cache; _ }; _ } -> (
+      match how_to_cache with
+      | Action_intf.Memoize_or_distribute.Neither -> false
+      | Memoize -> memoize
+      | Distribute -> true)
   in
   fun t ->
     match loop t with

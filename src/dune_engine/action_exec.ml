@@ -210,6 +210,29 @@ let bash_exn =
       User_error.raise ~loc
         [ Pp.textf "I need bash to %s but I couldn't find it :(" needed_to ]
 
+(* When passing these to an extension, they shouldn't need to know about any
+   kind of dynamic build dependency functions or prepped dependencies, etc,
+   which should be handled here instead. *)
+let restrict_ctx { targets; context; metadata; rule_loc; build_deps = _ } =
+  { Action_intf.Ext.targets; context; purpose = metadata.purpose; rule_loc }
+
+let restrict_env
+    { working_dir
+    ; env
+    ; stdout_to
+    ; stderr_to
+    ; stdin_from
+    ; exit_codes
+    ; prepared_dependencies = _
+    } =
+  { Action_intf.Ext.working_dir
+  ; env
+  ; stdout_to
+  ; stderr_to
+  ; stdin_from
+  ; exit_codes
+  }
+
 let rec exec t ~ectx ~eenv =
   match (t : Action.t) with
   | Run (Error e, _) -> Action.Prog.Not_found.raise e
@@ -378,6 +401,11 @@ let rec exec t ~ectx ~eenv =
         ~env:eenv.env ~script
     in
     Done
+  | Extension { input; spec = { action; _ }; _ } ->
+    let* () =
+      action input ~ectx:(restrict_ctx ectx) ~eenv:(restrict_env eenv)
+    in
+    Fiber.return Done
 
 and redirect_out t ~ectx ~eenv ~perm outputs fn =
   redirect t ~ectx ~eenv ~out:(outputs, fn, perm) ()

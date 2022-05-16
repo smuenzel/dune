@@ -55,6 +55,11 @@ module Make (Src : Action_intf.Ast) (Dst : Action_intf.Ast) = struct
     | Format_dune_file (ver, src, dst) ->
       Format_dune_file (ver, f_path ~dir src, f_target ~dir dst)
     | Cram script -> Cram (f_path ~dir script)
+    | Extension _ ->
+      Code_error.raise
+        "called [Action_mapper.map] on [Extension] variant. manually unroll \
+         via [map_one_step] instead"
+        []
 
   let rec map t ~dir ~f_program ~f_string ~f_path ~f_target =
     map_one_step map t ~dir ~f_program ~f_string ~f_path ~f_target

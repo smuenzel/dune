@@ -286,6 +286,13 @@ struct
         ; target dst
         ]
     | Cram script -> List [ atom "cram"; path script ]
+    | Extension { input; spec = { name; version; encode; _ }; _ } ->
+      List
+        [ atom "extension"
+        ; List [ atom "name"; atom name ]
+        ; List [ atom "version"; atom (Int.to_string version) ]
+        ; encode input
+        ]
 
   let run prog args = Run (prog, args)
 

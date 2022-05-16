@@ -477,6 +477,8 @@ let rec expand (t : Action_dune_lang.t) : Action.t Action_expander.t =
   | Cram script ->
     let+ script = E.dep script in
     O.Cram script
+  | Extension _ ->
+    Code_error.raise "extension actions are fully expanded already" []
 
 let expand_no_targets t ~loc ~deps:deps_written_by_user ~expander ~what =
   let open Action_builder.O in

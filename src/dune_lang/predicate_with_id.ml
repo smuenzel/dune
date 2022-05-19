@@ -5,6 +5,8 @@ type 'a t =
   ; f : 'a -> bool
   }
 
+let predicate t = t.f
+
 let compare x y = Dyn.compare (Lazy.force x.id) (Lazy.force y.id)
 
 let equal x y = compare x y = Ordering.Eq

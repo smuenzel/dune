@@ -6,6 +6,8 @@ open Stdune
 
 type 'a t
 
+val predicate : 'a t -> 'a Predicate.t
+
 val equal : 'a t -> 'a t -> bool
 
 val compare : 'a t -> 'a t -> Ordering.t

@@ -784,7 +784,11 @@ end = struct
       let real_directory_targets =
         Path.Build.Set.of_keys rules_here.by_directory_targets
       in
-      let directory_targets = Path.Build.Set.of_keys directory_targets in
+      let directory_targets =
+        Path.Build.Map.filter_mapi directory_targets ~f:(fun target loc ->
+            Option.some_if (Path.Build.is_descendant target ~of_:dir) loc)
+        |> Path.Build.Set.of_keys
+      in
       if not (Path.Build.Set.equal directory_targets real_directory_targets)
       then
         Code_error.raise

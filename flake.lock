@@ -194,16 +194,16 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1771613821,
-        "narHash": "sha256-JwVNRca8q1WfmuFLPOK3hL1DxmaKRYd+gJgV9xTDUhI=",
+        "lastModified": 1782978358,
+        "narHash": "sha256-WXDcuVogNNQ/CZaqnhyz0Zq8dwJOvr7PYTsxV12MVUo=",
         "owner": "oxcaml",
         "repo": "oxcaml",
-        "rev": "7d714cfb3f1c79c9b1e2a9c40ac60ba0c44cafd7",
+        "rev": "172cba3614a4a1e8d621d88e3d11de4ad80bed33",
         "type": "github"
       },
       "original": {
         "owner": "oxcaml",
-        "ref": "5.2.0minus-31",
+        "ref": "5.4.0-ox2",
         "repo": "oxcaml",
         "type": "github"
       }
@@ -211,17 +211,17 @@
     "oxcaml-opam-repository": {
       "flake": false,
       "locked": {
-        "lastModified": 1776159845,
-        "narHash": "sha256-+9ZQF2VH0O0G8RtN0hTf4k+w6yL63g6tblq3uzTKzG8=",
+        "lastModified": 1788184580,
+        "narHash": "sha256-bXzGbJQUlV0rdQV+9iAo2RSVg4epY7W2WTTD60Q9AYA=",
         "owner": "oxcaml",
         "repo": "opam-repository",
-        "rev": "231c88c2e564fdca40e15e750aacad5fb0887435",
+        "rev": "bb4555262936283daf5cbc82423509d4e7069b15",
         "type": "github"
       },
       "original": {
         "owner": "oxcaml",
         "repo": "opam-repository",
-        "rev": "231c88c2e564fdca40e15e750aacad5fb0887435",
+        "rev": "bb4555262936283daf5cbc82423509d4e7069b15",
         "type": "github"
       }
     },

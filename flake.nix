@@ -15,10 +15,10 @@
       flake = false;
     };
     oxcaml = {
-      url = "github:oxcaml/oxcaml/5.2.0minus-31";
+      url = "github:oxcaml/oxcaml/5.4.0-ox9";
     };
     oxcaml-opam-repository = {
-      url = "github:oxcaml/opam-repository/231c88c2e564fdca40e15e750aacad5fb0887435";
+      url = "github:oxcaml/opam-repository/b66db7ae4ad21debd1b078635cc92e88d73610f8";
       flake = false;
     };
     revdeps-dune = {
